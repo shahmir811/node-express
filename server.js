@@ -3,6 +3,8 @@ const express = require('express');
 var app = express();
 var port = process.env.PORT || 3000;
 
+app.use(express.static(__dirname + '/public'));
+
 // Following is the handler for HTTP get requests
 app.get('/', (req, res) => {
 
@@ -24,4 +26,6 @@ app.get('/bad', (req, res) => {
 });
 
 
-app.listen(port);
+app.listen(port, () => {
+  console.log('Server is running on port 3000');
+});
