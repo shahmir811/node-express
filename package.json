@@ -1,0 +1,14 @@
+{
+  "name": "node-webserver",
+  "version": "1.0.0",
+  "description": "Introduction to Node Express",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Shahmir Khan Jadoon",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.15.3"
+  }
+}
