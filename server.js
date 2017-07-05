@@ -1,19 +1,37 @@
 const express = require('express');
 const hbs = require('hbs');
+const fs = require('fs');
 
 var app = express();
 hbs.registerPartials(__dirname + '/views/partials'); // Register Partials
 app.set('view engine', 'hbs'); // set view engine to hbs
 var port = process.env.PORT || 3000;
 
-app.use(express.static(__dirname + '/public'));
+app.use( (req, res, next) => {
+  var now = new Date().toString(); // gives human readable timestamp
+  var log = `${now}: ${req.method} ${req.url}`;
 
-// app.use( (req, res, next) => {
-//   var now = new Date().toString(); // gives human readable timestamp
-//   console.log(`${now}: `);
-//
-//   next();
-// });
+  console.log(log);
+  fs.appendFile('server.log', log + '\n', (error) => {
+    if (error) {
+      console.log('Unable to append to  server.log');
+    }
+  });
+
+  next();
+});
+
+// Following is the middleware for maintenance mode
+
+app.use( (req, res, next) => {
+
+  res.render('maintenance.hbs');
+
+});
+
+//.............................................//
+
+app.use(express.static(__dirname + '/public'));
 
 hbs.registerHelper('getCurrentYear', () => {
   return new Date().getFullYear();
