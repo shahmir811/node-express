@@ -22,12 +22,12 @@ app.use( (req, res, next) => {
 });
 
 // Following is the middleware for maintenance mode
-
-app.use( (req, res, next) => {
-
-  res.render('maintenance.hbs');
-
-});
+//
+// app.use( (req, res, next) => {
+//
+//   res.render('maintenance.hbs');
+//
+// });
 
 //.............................................//
 
@@ -61,7 +61,15 @@ app.get('/bad', (req, res) => {
   });
 });
 
+app.get('/projects', (req, res) => {
+  res.render('projects.hbs', {
+    pageTitle: 'Projects Page',
+    Portfolio: 'Welcome to the Projects Page'
+  });
+});
+
+
 
 app.listen(port, () => {
-  console.log('Server is running on port 3000');
+  console.log(`Server is running on port ${port}`);
 });
